@@ -18,10 +18,10 @@ class RealEstate extends Admin
 {
     //>>展示报修列表
     public function repairs(){
-        $arr = \think\Db::name('repairs')->select();
-        //var_dump($arr);exit();
-        //$this->success("新增成功","Menu/index");
+        $arr = \think\Db::name('repairs')->paginate(5);
+        $pager = $arr->render();
         $this->assign("list",$arr);
+        $this->assign("pager",$pager);
         return $this->fetch("repairs");
     }
     //>>增加报修

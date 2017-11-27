@@ -40,15 +40,12 @@
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
+            {volist name="channel" id="menu"}
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="/Index/index.html" class="navbar-link">首页</a></p>
-            </div><div class="col-xs-3">
-            <p class="navbar-text"><a href="/Service/listIndex.html" class="navbar-link">服务</a></p>
-        </div><div class="col-xs-3">
-            <p class="navbar-text"><a href="/Find/all.html" class="navbar-link">发现</a></p>
-        </div><div class="col-xs-3">
-            <p class="navbar-text"><a href="/Center/index.html" class="navbar-link">我的</a></p>
-        </div>	</div>
+                <p class="navbar-text"><a href="/home/{$menu.url}.html" class="navbar-link">{$menu.title}</a></p>
+            </div>
+            {/volist}
+        </div>
     </nav>
     <!--导航结束-->
 
@@ -88,7 +85,7 @@
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
         </form>
-        <p class="text-danger text-right"><a href="/User/register.html">新用户注册</a></p>
+        <p class="text-danger text-right"><a href="/User/login/register.html">新用户注册</a></p>
     </div>
     <!-- /container -->
 

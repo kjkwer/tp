@@ -11,6 +11,7 @@ namespace app\user\controller;
 use app\common\controller\UcApi;
 use think\Controller;
 use think\Cookie;
+use think\Db;
 
 /**
  * 用户登入
@@ -58,6 +59,8 @@ class Login extends Controller {
             }
 
         } else { //显示登录表单
+            $channel = Db::table("channel")->where("status","=",1)->select();
+            $this->assign('channel',$channel);
             return $this->fetch("index");
         }
     }
@@ -89,7 +92,9 @@ class Login extends Controller {
 			}
 
 		} else { //显示注册表单
-			return $this->fetch();
+            $channel = Db::table("channel")->where("status","=",1)->select();
+            $this->assign('channel',$channel);
+			return $this->fetch('register_1');
 		}
 	}
 	/* 退出登录 */

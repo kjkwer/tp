@@ -29,7 +29,7 @@ class Index extends Home{
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表
         $this->assign('page',model('Document')->page);//分页
-        $this->assign('channel',$channel);//分页
+        $this->assign('channel',$channel);
 
         return $this->fetch("index");
     }

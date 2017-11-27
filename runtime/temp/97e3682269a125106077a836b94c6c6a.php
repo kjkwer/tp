@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:79:"F:\www\tp\public/../application/admin/view/default/real_estate\editRepairs.html";i:1511682742;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:79:"F:\www\tp\public/../application/admin/view/default/real_estate\editRepairs.html";i:1511754052;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -116,12 +116,6 @@
             <input type="text" class="text input-large" name="tel" value="<?php echo (isset($info['tel']) && ($info['tel'] !== '')?$info['tel']:""); ?>">
         </div>
     </div>
-    <!--<div class="form-item">-->
-    <!--<label class="item-label">模块<span class="check-tips">（所属模块）</span></label>-->
-    <!--<div class="controls">-->
-    <!--<input type="text" class="text input-large" name="module" value="<?php echo (isset($info['module']) && ($info['module'] !== '')?$info['module']:'admin'); ?>">-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="form-item">
         <label class="item-label">地址<span class="check-tips">（地址）</span></label>
         <div class="controls">
@@ -140,42 +134,6 @@
             <textarea name="content" id="" cols="50" rows="10"><?php echo (isset($info['content']) && ($info['content'] !== '')?$info['content']:''); ?></textarea>
         </div>
     </div>
-    <!--<div class="form-item">-->
-        <!--<label class="item-label">上级菜单<span class="check-tips">（所属的上级菜单）</span></label>-->
-        <!--<div class="controls">-->
-            <!--<select name="pid">-->
-                <!--<?php if(is_array($Menus) || $Menus instanceof \think\Collection || $Menus instanceof \think\Paginator): $i = 0; $__LIST__ = $Menus;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?>-->
-                <!--<option value="<?php echo $menu['id']; ?>"><?php echo $menu['title_show']; ?></option>-->
-                <!--<?php endforeach; endif; else: echo "" ;endif; ?>-->
-            <!--</select>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-item">-->
-        <!--<label class="item-label">分组<span class="check-tips">（用于左侧分组二级菜单）</span></label>-->
-        <!--<div class="controls">-->
-            <!--<input type="text" class="text input-large" name="group" value="<?php echo (isset($info['group']) && ($info['group'] !== '')?$info['group']:''); ?>">-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-item">-->
-        <!--<label class="item-label">是否隐藏<span class="check-tips"></span></label>-->
-        <!--<div class="controls">-->
-            <!--<label class="radio"><input type="radio" name="hide" value="1">是</label>-->
-            <!--<label class="radio"><input type="radio" name="hide" value="0">否</label>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-item">-->
-        <!--<label class="item-label">仅开发者模式可见<span class="check-tips"></span></label>-->
-        <!--<div class="controls">-->
-            <!--<label class="radio"><input type="radio" name="is_dev" value="1">是</label>-->
-            <!--<label class="radio"><input type="radio" name="is_dev" value="0">否</label>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-item">-->
-        <!--<label class="item-label">说明<span class="check-tips">（菜单详细说明）</span></label>-->
-        <!--<div class="controls">-->
-            <!--<input type="text" class="text input-large" name="tip" value="<?php echo (isset($info['tip']) && ($info['tip'] !== '')?$info['tip']:''); ?>">-->
-        <!--</div>-->
-    <!--</div>-->
     <div class="form-item">
         <input type="hidden" name="id" value="<?php echo (isset($info['id']) && ($info['id'] !== '')?$info['id']:''); ?>">
         <button class="btn submit-btn ajax-posts" id="submit" type="submit" target-form="form-horizontal">确 定</button>
