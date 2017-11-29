@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"F:\www\tp\public/../application/home/view/default/article\article\detail.html";i:1511942881;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"F:\www\tp\public/../application/home/view/default/article\article\detail.html";i:1511953654;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -42,7 +42,7 @@
         <div class="blank"></div>
         <h3 class="noticeDetailTitle"><strong><?php echo $inform['title']; ?></strong></h3>
         <div class="noticeDetailInfo">发布者:<?php echo $author; ?></div>
-        <div class="noticeDetailInfo">更新时间：<?php echo date("Y-m-d",$inform['update_time']); ?></div>
+        <div class="noticeDetailInfo">时间：<?php echo date("Y-m-d H:i",$inform['create_time']); ?>至<?php echo date("Y-m-d H:i",$inform['deadline']); ?></div>
         <?php if($overdue=="no"): if($category['id']==48): if($model): ?>
                     <a href="javascript:;" class="btn btn-success" disabled="disabled">报名成功</a>
                 <?php else: ?>
@@ -64,7 +64,7 @@
     $("#join").click(function () {
         //>>获取活动的id
         var article_id = $(this).attr("article_id");
-        var that = $(this)
+        var that = $(this);
         //>>发送Ajax请求
         $.post("/home/inform/join",{"article_id":article_id},function (data) {
             if (data == "fail"){

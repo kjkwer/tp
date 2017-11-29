@@ -28,16 +28,19 @@ class Article extends Home {
 		$category = $this->category();
 		/* 获取当前分类列表 */
 		$Document = new Document();
-		$list = Db::table("document")->where("status","=",1)->where("category_id","=",$category["id"])->paginate(3);
+		$list = Db::table("document")->where("status","=",1)->where("category_id","=",$category["id"])->order("update_time desc")->paginate(3);
 		if(false === $list){
 			$this->error('获取列表数据失败！');
 		}
+		//>>获取当前时间戳
+        $time = time();
         //>>获取导航菜单
         $channel = Db::table("channel")->where("status","=",1)->select();
 		/* 模板赋值并渲染模板 */
 		$this->assign('category', $category);
         $this->assign('channel',$channel);
 		$this->assign('informList', $list);
+		$this->assign('time', $time);
 		return $this->fetch($category['template_lists']);
 	}
 	/* 文档模型详情页 */

@@ -43,7 +43,7 @@ class User extends Controller
         }
         //>>查找该用户的报修信息,并设置分页
         $repairsModel = new Repairs();
-        $repairsList = $repairsModel->where(["username"=>$username])->order("update_time desc")->paginate(5);
+        $repairsList = $repairsModel->where(["username"=>$username])->where("status","=","1")->order("update_time desc")->paginate(5);
         $pager = $repairsList->render();
         //>>获取导航信息
         $channel = Db::table("channel")->where("status","=",1)->select();
@@ -64,7 +64,7 @@ class User extends Controller
         $id = $request->param("id");
         //>>删除数据
         $repairs=new Repairs();
-        $result = $repairs->where("id","=",$id)->delete();
+        $result = $repairs->where("id","=",$id)->update(["status"=>0]);
         if($result){
             session('admin_menu_list',null);
             //记录行为

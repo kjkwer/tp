@@ -18,7 +18,7 @@ class RealEstate extends Admin
 {
     //>>展示报修列表
     public function repairs(){
-        $arr = \think\Db::name('repairs')->paginate(5);
+        $arr = \think\Db::name('repairs')->where("status","=","1")->order("update_time desc")->paginate(5);
         $pager = $arr->render();
         $this->assign("list",$arr);
         $this->assign("pager",$pager);
@@ -39,7 +39,7 @@ class RealEstate extends Admin
             if($data){
                 session('admin_menu_list',null);
                 //记录行为
-                action_log('update_menu', 'Menu', $data->id, UID);
+                action_log('update_menu', 'Repairs', $data->id, UID);
                 $this->success('新增成功', "RealEstate/repairs");
             } else {
                 $this->error($repairs->getError());
@@ -71,7 +71,7 @@ class RealEstate extends Admin
             if($result){
                 session('admin_menu_list',null);
                 //记录行为
-                action_log('update_menu', 'Menu', $result->id, UID);
+                action_log('update_menu', 'Repairs', $result->id, UID);
                 $this->success('修改成功', "RealEstate/repairs");
             } else {
                 $this->error($repairs->getError());
@@ -90,11 +90,11 @@ class RealEstate extends Admin
             $ids = array_unique($ids["id"]);
         }
         $repairs=new Repairs();
-        $result = $repairs->where("id","in",$ids)->delete();
+        $result = $repairs->where("id","in",$ids)->update(["status"=>0]);
         if($result){
             session('admin_menu_list',null);
             //记录行为
-            action_log('update_menu', 'Menu', $ids, UID);
+            action_log('update_menu', 'Repairs', $ids, UID);
             $this->success('删除成功');
         } else {
             $this->error('删除失败！');

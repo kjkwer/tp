@@ -21,20 +21,22 @@ class Inform extends Controller
         $request = Request::instance();
         $category_id = $request->get("category_id");
         //>>获取小区通知的数据
-        $informList = Db::table("document")->where("status","=",1)->where("category_id","=",$category_id)->paginate(3);
+        $informList = Db::table("document")->where("status","=",1)->where("category_id","=",$category_id)->order("update_time desc")->paginate(3);
         return json_encode($informList);
     }
-    //>>获取文章的封面图片路径和更新事件
+    //>>获取文章的封面图片路径和更新时间
     public function message(){
         $request = Request::instance();
         $cover_id = $request->post("cover_id");
         $update_time = $request->post("update_time");
         //>>获取通知的封面图片
         $cover_path = get_cover($cover_id,"path");
-        //>>将时间戳格式化
+        //>>将更新时间格式化
         $time = date("Y-m-d H:i:s",$update_time);
+        //>>获取当前时间戳
+        $nowTime = time();
         //>>响应数据
-        return json_encode(["cover"=>$cover_path,"time"=>$time]);
+        return json_encode(["cover"=>$cover_path,"time"=>$time,"nowTime"=>$nowTime]);
     }
     //>>参与活动
     public function join(){

@@ -49,6 +49,9 @@
 					<p class="title">{$inform.title}</p>
 					<p class="intro">{$inform.description}</p>
 					<p class="info">浏览: {$inform.view} <span class="pull-right">{$inform.update_time|date="Y-m-d H:i:s",###}</span> </p>
+					{if $time > $inform.deadline}
+					<p><span style="color: slategray">已过期</span></p>
+					{/if}
 				</div>
 			</a>
 		</div>
@@ -77,7 +80,12 @@
                     $.post("/home/inform/message",{"cover_id":this.cover_id,"update_time":this.update_time},function (data) {
                         var cover = $.parseJSON(data).cover;
                         var time = $.parseJSON(data).time;
-                        var str = '<div class="row noticeList"> <a href="/home/article/detail/id/'+that.id+'.html"> <div class="col-xs-2"> <img class="noticeImg" src="'+cover+'" alt="加载失败"/> </div> <div class="col-xs-10"> <p class="title">'+that.title+'</p> <p class="intro">'+that.description+'</p> <p class="info">浏览: '+that.view+' <span class="pull-right">'+time+'</span> </p> </div> </a> </div>'
+                        var newTime = $.parseJSON(data).nowTime;
+                        var str = '<div class="row noticeList"> <a href="/home/article/detail/id/'+that.id+'.html"> <div class="col-xs-2"> <img class="noticeImg" src="'+cover+'" alt="加载失败"/> </div> <div class="col-xs-10"> <p class="title">'+that.title+'</p> <p class="intro">'+that.description+'</p> <p class="info">浏览: '+that.view+' <span class="pull-right">'+time+'</span> ';
+                        if (newTime > that.deadline){
+                            str += '<p><span style="color: slategray">已过期</span></p>';
+						}
+                        str += '</p> </div> </a> </div>';
                         $("#inform").append(str);
                     })
                 })
