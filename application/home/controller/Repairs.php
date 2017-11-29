@@ -17,6 +17,13 @@ class Repairs extends Controller
 {
     //>>在线报修
     public function repairs(){
+        if (!is_login()){
+            //>>未登录,跳转至登录页面
+            $this->success('请先登录', "/user/login/index","",3);
+        }else{
+            //>>已登录获取用户名称
+            $username = get_username();
+        }
         $request=Request::instance();
         if ($request->isPost()){
             //>>接收数据
@@ -30,6 +37,7 @@ class Repairs extends Controller
             $repairs = new \app\admin\model\Repairs();
             $data["sn"]=uniqid();
             $data["status"]=1;
+            $data["username"]=$username;
             $repairs->data($data);
             $result = $repairs->save();
             if ($result){
@@ -43,8 +51,10 @@ class Repairs extends Controller
         }
         //>>获取导航信息
         $channel = Db::table("channel")->where("status","=",1)->select();
+        //>>将数据放入页面中
         $this->assign('channel',$channel);
         //>>显示报修表单
         return $this->fetch("repairs");
     }
+
 }

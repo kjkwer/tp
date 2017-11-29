@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:59:"F:\www\tp\public/../application/home\view\inform\index.html";i:1511782758;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:59:"F:\www\tp\public/../application/home\view\inform\index.html";i:1511859238;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -25,7 +25,16 @@
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
             </div>
-            <?php endforeach; endif; else: echo "" ;endif; ?>
+            <?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
+            </div>
+            <?php else: ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录</a></p>
+                <p class="navbar-text"><a href="/user/login/register.html" class="navbar-link">注册</a></p>
+            </div>
+            <?php endif; ?>
         </div>
     </nav>
     <!--导航结束-->
@@ -68,7 +77,6 @@
                     $.post("message",{"cover_id":this.cover_id,"update_time":this.update_time},function (data) {
                         var cover = $.parseJSON(data).cover;
                         var time = $.parseJSON(data).time;
-                        console.debug(cover);
                         var str = '<div class="row noticeList"> <a href="intro?id='+that.id+'"> <div class="col-xs-2"> <img class="noticeImg" src="'+cover+'" alt="加载失败"/> </div> <div class="col-xs-10"> <p class="title">'+that.title+'</p> <p class="intro">'+that.description+'</p> <p class="info">浏览: '+that.view+' <span class="pull-right">'+time+'</span> </p> </div> </a> </div>'
                         $("#inform").append(str);
                     })

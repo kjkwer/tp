@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"F:\www\tp\public/../application/home/view/default/index\index.html";i:1511764733;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"F:\www\tp\public/../application/home/view/default/index\index.html";i:1511936990;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -21,11 +21,15 @@
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
             </div>
-            <?php endforeach; endif; else: echo "" ;endif; ?>
-            <div class="col-xs-3">
-                <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录</a></p>
-                <p class="navbar-text"><a href="/user/login/register.html" class="navbar-link">注册</a></p>
-            </div>
+            <?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
+                </div>
+                <?php else: ?>
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录/注册</a></p>
+                </div>
+            <?php endif; ?>
         </div>
     </nav>
     <!--导航结束-->
@@ -38,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="<?php echo url('inform/index'); ?>">
+                        <a href="<?php echo url('Article/lists?category='.get_category_name(42)); ?>">
                             <div class="indexLabel label-danger">
                                 <span class="glyphicon glyphicon-bullhorn"></span><br/>
                                 小区通知
@@ -46,7 +50,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="service.html">
+                        <a href="<?php echo url('Article/lists?category='.get_category_name(45)); ?>">
                             <div class="indexLabel label-warning">
                                 <span class="glyphicon glyphicon-ok-circle"></span><br/>
                                 便民服务
@@ -62,7 +66,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="<?php echo url('Article/lists?category='.get_category_name(46)); ?>">
                             <div class="indexLabel label-success">
                                 <span class="glyphicon glyphicon-briefcase"></span><br/>
                                 商家活动
@@ -78,7 +82,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="<?php echo url('Article/lists?category='.get_category_name(48)); ?>">
                             <div class="indexLabel label-default">
                                 <span class="glyphicon glyphicon-apple"></span><br/>
                                 小区活动

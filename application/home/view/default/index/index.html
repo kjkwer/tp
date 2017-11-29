@@ -21,10 +21,15 @@
                 <p class="navbar-text"><a href="/home/{$menu.url}.html" class="navbar-link">{$menu.title}</a></p>
             </div>
             {/volist}
-            <div class="col-xs-3">
-                <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录</a></p>
-                <p class="navbar-text"><a href="/user/login/register.html" class="navbar-link">注册</a></p>
-            </div>
+            {if condition="is_login()"}
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="{:url('user/index')}" class="navbar-link">我的</a></p>
+                </div>
+                {else/}
+                <div class="col-xs-3">
+                    <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录/注册</a></p>
+                </div>
+            {/if}
         </div>
     </nav>
     <!--导航结束-->
@@ -37,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="{:url('inform/index')}">
+                        <a href="{:url('Article/lists?category='.get_category_name(42))}">
                             <div class="indexLabel label-danger">
                                 <span class="glyphicon glyphicon-bullhorn"></span><br/>
                                 小区通知
@@ -45,7 +50,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="service.html">
+                        <a href="{:url('Article/lists?category='.get_category_name(45))}">
                             <div class="indexLabel label-warning">
                                 <span class="glyphicon glyphicon-ok-circle"></span><br/>
                                 便民服务
@@ -61,7 +66,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="{:url('Article/lists?category='.get_category_name(46))}">
                             <div class="indexLabel label-success">
                                 <span class="glyphicon glyphicon-briefcase"></span><br/>
                                 商家活动
@@ -77,7 +82,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="{:url('Article/lists?category='.get_category_name(48))}">
                             <div class="indexLabel label-default">
                                 <span class="glyphicon glyphicon-apple"></span><br/>
                                 小区活动

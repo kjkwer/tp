@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:59:"F:\www\tp\public/../application/home\view\inform\intro.html";i:1511782140;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:59:"F:\www\tp\public/../application/home\view\inform\intro.html";i:1511871196;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -11,13 +11,6 @@
     <!-- Bootstrap -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <style>
         .main{margin-bottom: 60px;}
         .indexLabel{padding: 10px 0; margin: 10px 0 0; color: #fff;}
@@ -28,18 +21,20 @@
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
-            <!--<div class="col-xs-3">-->
-                <!--<p class="navbar-text"><a href="index.html" class="navbar-link">首页</a></p>-->
-            <!--</div>-->
-            <!--<div class="col-xs-3">-->
-                <!--<p class="navbar-text"><a href="#" class="navbar-link">服务</a></p>-->
-            <!--</div>-->
-            <!--<div class="col-xs-3">-->
-                <!--<p class="navbar-text"><a href="#" class="navbar-link">发现</a></p>-->
-            <!--</div>-->
-            <!--<div class="col-xs-3">-->
-                <!--<p class="navbar-text"><a href="#" class="navbar-link">我的</a></p>-->
-            <!--</div>-->
+            <?php if(is_array($channel) || $channel instanceof \think\Collection || $channel instanceof \think\Paginator): $i = 0; $__LIST__ = $channel;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
+            </div>
+            <?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
+            </div>
+            <?php else: ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录</a></p>
+                <p class="navbar-text"><a href="/user/login/register.html" class="navbar-link">注册</a></p>
+            </div>
+            <?php endif; ?>
         </div>
     </nav>
     <!--导航结束-->

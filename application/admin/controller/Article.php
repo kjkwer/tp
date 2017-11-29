@@ -482,6 +482,7 @@ class Article extends Admin {
     	/* 获取数据对象 */
     	$model_id = input('param.model_id',0);
     	$data = input();
+
     	if(!$model_id)
     		$this->error('模型id不能为空');
     	//获取模型信息
@@ -489,6 +490,7 @@ class Article extends Admin {
         if($model['extend']){
             //更新基础模型
             $logic = logic($model['extend']);
+            //var_dump($logic);exit();
             $res_id = $logic->updates();
             $res_id || $this->error($logic->getError());
         }

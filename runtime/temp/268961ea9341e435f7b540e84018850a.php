@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:75:"F:\www\tp\public/../application/admin/view/default/real_estate\repairs.html";i:1511748316;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:75:"F:\www\tp\public/../application/admin/view/default/real_estate\repairs.html";i:1511855460;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -129,6 +129,7 @@
                 <th>ID</th>
                 <th>报修单号</th>
                 <th>报修人</th>
+                <th>联系人</th>
                 <th>电话</th>
                 <th>地址</th>
                 <th>标题</th>
@@ -143,6 +144,7 @@
                 <td><input class="ids row-selected" type="checkbox" name="id[]" value="<?php echo $menu['id']; ?>"></td>
                 <td><?php echo $menu['id']; ?></td>
                 <td><?php echo $menu['sn']; ?></td>
+                <td><?php echo $menu['username']; ?></td>
                 <td><?php echo $menu['name']; ?></td>
                 <td><?php echo $menu['tel']; ?></td>
                 <td><?php echo $menu['address']; ?></td>

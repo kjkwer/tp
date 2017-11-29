@@ -1,5 +1,6 @@
 <?php
 namespace app\home\controller;
+use think\Db;
 use think\Request;
 use app\home\model\Document;
 /**
@@ -23,23 +24,22 @@ class Article extends Home {
 
 	/* 文档模型列表页 */
 	public function lists($p = 1){
-
 		/* 分类信息 */
 		$category = $this->category();
 		/* 获取当前分类列表 */
 		$Document = new Document();
-		$list = $Document->lists($category['id']);
+		$list = Db::table("document")->where("status","=",1)->where("category_id","=",$category["id"])->paginate(3);
 		if(false === $list){
 			$this->error('获取列表数据失败！');
 		}
-
+        //>>获取导航菜单
+        $channel = Db::table("channel")->where("status","=",1)->select();
 		/* 模板赋值并渲染模板 */
 		$this->assign('category', $category);
-		$this->assign('list', $list);
-		// echo $category['template_lists'];
+        $this->assign('channel',$channel);
+		$this->assign('informList', $list);
 		return $this->fetch($category['template_lists']);
 	}
-
 	/* 文档模型详情页 */
 	public function detail($id = 0, $p = 1){
 		/* 标识正确性检测 */
@@ -70,10 +70,25 @@ class Article extends Home {
 		/* 更新浏览数 */
 		$map = array('id' => $id);
 		$Document->where($map)->setInc('view');
-		/* 模板赋值并渲染模板 */
+        //>>获取导航菜单
+        $channel = Db::table("channel")->where("status","=",1)->select();
+        //>>判断用户是否参与该活动
+        $member_id = is_login();
+        $model = Db::table("member_article")->where("member_id","=",$member_id)->where("article_id","=",$info["id"])->find();
+		//>>判断该活动是否过期
+        $deadline = $info["deadline"];
+        if (time()>$deadline){
+            $overdue = "yes";
+        }else{
+            $overdue = "no";
+        }
+        /* 模板赋值并渲染模板 */
+        $this->assign('channel',$channel);
 		$this->assign('category', $category);
-		$this->assign('info', $info);
+		$this->assign('inform', $info);
 		$this->assign('page', $p); //页码
+		$this->assign('model', $model);
+		$this->assign('overdue', $overdue);
 		return $this->fetch($tmpl);
 	}
 
@@ -84,7 +99,6 @@ class Article extends Home {
 		if(empty($id)){
 			$this->error('没有指定文档分类！');
 		}
-
 		/* 获取分类信息 */
 		$category = model('Category')->info($id);
 		if($category && 1 == $category['status']){
@@ -100,5 +114,4 @@ class Article extends Home {
 			$this->error('分类不存在或被禁用！');
 		}
 	}
-
 }

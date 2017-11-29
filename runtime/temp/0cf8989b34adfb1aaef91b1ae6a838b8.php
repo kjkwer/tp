@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:71:"F:\www\tp\public/../application/user/view/default/login\register_1.html";i:1511754200;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:71:"F:\www\tp\public/../application/user/view/default/login\register_1.html";i:1511940072;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -41,15 +41,12 @@
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
+            <?php if(is_array($channel) || $channel instanceof \think\Collection || $channel instanceof \think\Paginator): $i = 0; $__LIST__ = $channel;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="/Index/index.html" class="navbar-link">首页</a></p>
-            </div><div class="col-xs-3">
-            <p class="navbar-text"><a href="/Service/listIndex.html" class="navbar-link">服务</a></p>
-        </div><div class="col-xs-3">
-            <p class="navbar-text"><a href="/Find/all.html" class="navbar-link">发现</a></p>
-        </div><div class="col-xs-3">
-            <p class="navbar-text"><a href="/Center/index.html" class="navbar-link">我的</a></p>
-        </div>	</div>
+                <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
+            </div>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
+        </div>
     </nav>
     <!--导航结束-->
 
