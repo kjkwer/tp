@@ -25,13 +25,16 @@
 				<p class="navbar-text"><a href="/home/{$menu.url}.html" class="navbar-link">{$menu.title}</a></p>
 			</div>
 			{/volist}
+			<div class="col-xs-3">
+				<p class="navbar-text"><a href="{:url('server/index')}" class="navbar-link">服务</a></p>
+			</div>
 			{if condition="is_login()"}
 			<div class="col-xs-3">
 				<p class="navbar-text"><a href="{:url('user/index')}" class="navbar-link">我的</a></p>
 			</div>
 			{else/}
 			<div class="col-xs-3">
-				<p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录/注册</a></p>
+				<p class="navbar-text"><a href="{:url('user/login/index')}" class="navbar-link">登录/注册</a></p>
 			</div>
 			{/if}
 		</div>
@@ -49,9 +52,6 @@
 					<p class="title">{$inform.title}</p>
 					<p class="intro">{$inform.description}</p>
 					<p class="info">浏览: {$inform.view} <span class="pull-right">{$inform.update_time|date="Y-m-d H:i:s",###}</span> </p>
-					{if $time > $inform.deadline}
-					<p><span style="color: slategray">已过期</span></p>
-					{/if}
 				</div>
 			</a>
 		</div>
@@ -80,11 +80,7 @@
                     $.post("/home/inform/message",{"cover_id":this.cover_id,"update_time":this.update_time},function (data) {
                         var cover = $.parseJSON(data).cover;
                         var time = $.parseJSON(data).time;
-                        var newTime = $.parseJSON(data).nowTime;
                         var str = '<div class="row noticeList"> <a href="/home/article/detail/id/'+that.id+'.html"> <div class="col-xs-2"> <img class="noticeImg" src="'+cover+'" alt="加载失败"/> </div> <div class="col-xs-10"> <p class="title">'+that.title+'</p> <p class="intro">'+that.description+'</p> <p class="info">浏览: '+that.view+' <span class="pull-right">'+time+'</span> ';
-                        if (newTime > that.deadline){
-                            str += '<p><span style="color: slategray">已过期</span></p>';
-						}
                         str += '</p> </div> </a> </div>';
                         $("#inform").append(str);
                     })

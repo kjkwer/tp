@@ -443,12 +443,10 @@ function get_nickname($uid = 0){
     if(!($uid && is_numeric($uid))){ //获取当前登录用户名
         return session('user_auth.username');
     }
-
     /* 获取缓存数据 */
     if(empty($list)){
         $list = cache('sys_user_nickname_list');
     }
-
     /* 查找用户信息 */
     $key = "u{$uid}";
     if(isset($list[$key])){ //已缓存，直接使用
@@ -471,7 +469,16 @@ function get_nickname($uid = 0){
     }
     return $name;
 }
-
+/**
+ * 根据用户的状态
+ */
+function get_user(){
+    //>>获取登录信息
+    $loginMessage = session("user_auth");
+    //>>获取用户模型对象
+    $user = \think\Db::table("ucenter_member")->where("id","=",$loginMessage["uid"])->find();
+    return $user["status"];
+}
 /**
  * 获取分类信息并缓存分类
  * @param  integer $id    分类ID

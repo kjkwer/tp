@@ -12,6 +12,7 @@ use app\common\controller\UcApi;
 use think\Controller;
 use think\Cookie;
 use think\Db;
+use think\Request;
 
 /**
  * 用户登入
@@ -101,10 +102,9 @@ class Login extends Controller {
 	public function logout(){
 		if(is_login()){
 			model('Member')->logout();
-			$this->success('退出成功！', url('User/login'));
+			$this->success('退出成功！', url('/home/index/index'));
 		} else {
 			$this->redirect('User/login');
 		}
 	}
-
 }

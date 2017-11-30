@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:59:"F:\www\tp\public/../application/home\view\user\repairs.html";i:1511944231;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:59:"F:\www\tp\public/../application/home\view\user\repairs.html";i:1512064257;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +17,11 @@
         <div class="col-xs-3">
             <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
         </div>
-        <?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+        <?php endforeach; endif; else: echo "" ;endif; ?>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('server/index'); ?>" class="navbar-link">服务</a></p>
+        </div>
+        <?php if(is_login()): ?>
         <div class="col-xs-3">
             <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
         </div>
@@ -32,45 +36,18 @@
 <!--导航结束-->
 <div class="container">
     <div class="row">
-        <div style="height: 100px"></div>
-    </div>
-    <div class="row">
         <div class="col-xs-12">
-            <table class="table table-striped table-hover table-condensed">
-                <thead>
-                <tr>
-                    <th>联系人</th>
-                    <th>联系电话</th>
-                    <th>地址</th>
-                    <th>报修内容</th>
-                    <th>状态</th>
-                    <th>更新时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-
-                <thbody>
-                    <?php if(is_array($repairsList) || $repairsList instanceof \think\Collection || $repairsList instanceof \think\Paginator): $i = 0; $__LIST__ = $repairsList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$repairs): $mod = ($i % 2 );++$i;?>
-                    <tr>
-                        <td><?php echo $repairs['name']; ?></td>
-                        <td><?php echo $repairs['tel']; ?></td>
-                        <td><?php echo $repairs['address']; ?></td>
-                        <td><?php echo $repairs['title']; ?></td>
-                        <td><?php echo !empty($repairs['status']=1)?"待处理":"已处理"; ?></td>
-                        <td><?php echo $repairs['update_time']; ?></td>
-                        <td>
-                            <a href="<?php echo url('editRepairs?id='.$repairs['id']); ?>">编辑</a>
-                            <a href="<?php echo url('deleteRepairs?id='.$repairs['id']); ?>">删除</a>
-                        </td>
-                    </tr>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                </thbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="page">
-            <?php echo $pager; ?>
+            <?php if(is_array($repairsList) || $repairsList instanceof \think\Collection || $repairsList instanceof \think\Paginator): $i = 0; $__LIST__ = $repairsList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$repairs): $mod = ($i % 2 );++$i;?>
+            <div class="container-fluid">
+                <div class="blank"></div>
+                <h3 class="noticeDetailTitle"><strong><?php echo $repairs['title']; ?></strong></h3>
+                <div class="noticeDetailInfo"><?php echo !empty($repairs['status']=1)?"待处理":"已处理"; ?></div>
+                <div class="noticeDetailInfo">更新时间：<?php echo $repairs['update_time']; ?></div>
+                <div><a href="<?php echo url('editRepairs?id='.$repairs['id']); ?>">编辑</a>
+                    <a href="<?php echo url('deleteRepairs?id='.$repairs['id']); ?>">删除</a></div>
+                <hr>
+            </div>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
         </div>
     </div>
 </div>

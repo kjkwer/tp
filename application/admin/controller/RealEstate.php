@@ -11,7 +11,6 @@ namespace app\admin\controller;
 
 
 use app\admin\model\Repairs;
-use think\Db;
 use think\Request;
 
 class RealEstate extends Admin

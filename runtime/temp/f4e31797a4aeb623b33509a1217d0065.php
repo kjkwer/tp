@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"F:\www\tp\public/../application/user/view/default/login\index.html";i:1511940064;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"F:\www\tp\public/../application/user/view/default/login\index.html";i:1512025333;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -46,6 +46,18 @@
                 <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
             </div>
             <?php endforeach; endif; else: echo "" ;endif; ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('home/server/index'); ?>" class="navbar-link">服务</a></p>
+            </div>
+            <?php if(is_login()): ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
+            </div>
+            <?php else: ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">登录/注册</a></p>
+            </div>
+            <?php endif; ?>
         </div>
     </nav>
     <!--导航结束-->

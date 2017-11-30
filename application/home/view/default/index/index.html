@@ -21,13 +21,16 @@
                 <p class="navbar-text"><a href="/home/{$menu.url}.html" class="navbar-link">{$menu.title}</a></p>
             </div>
             {/volist}
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="{:url('server/index')}" class="navbar-link">服务</a></p>
+            </div>
             {if condition="is_login()"}
                 <div class="col-xs-3">
                     <p class="navbar-text"><a href="{:url('user/index')}" class="navbar-link">我的</a></p>
                 </div>
                 {else/}
                 <div class="col-xs-3">
-                    <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录/注册</a></p>
+                    <p class="navbar-text"><a href="{:url('user/login/index')}" class="navbar-link">登录/注册</a></p>
                 </div>
             {/if}
         </div>
@@ -74,7 +77,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="zushou.html">
+                        <a href="{:url('rentSell/index')}">
                             <div class="indexLabel label-primary">
                                 <span class="glyphicon glyphicon-usd"></span><br/>
                                 小区租售

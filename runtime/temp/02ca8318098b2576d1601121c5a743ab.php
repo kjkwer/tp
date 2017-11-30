@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"F:\www\tp\public/../application/home/view/default/article\lists.html";i:1511954787;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"F:\www\tp\public/../application/home/view/default/article\lists.html";i:1512027172;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -25,13 +25,17 @@
 			<div class="col-xs-3">
 				<p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
 			</div>
-			<?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+			<?php endforeach; endif; else: echo "" ;endif; ?>
+			<div class="col-xs-3">
+				<p class="navbar-text"><a href="<?php echo url('server/index'); ?>" class="navbar-link">服务</a></p>
+			</div>
+			<?php if(is_login()): ?>
 			<div class="col-xs-3">
 				<p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
 			</div>
 			<?php else: ?>
 			<div class="col-xs-3">
-				<p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录/注册</a></p>
+				<p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">登录/注册</a></p>
 			</div>
 			<?php endif; ?>
 		</div>
@@ -49,9 +53,6 @@
 					<p class="title"><?php echo $inform['title']; ?></p>
 					<p class="intro"><?php echo $inform['description']; ?></p>
 					<p class="info">浏览: <?php echo $inform['view']; ?> <span class="pull-right"><?php echo date("Y-m-d H:i:s",$inform['update_time']); ?></span> </p>
-					<?php if($time > $inform['deadline']): ?>
-					<p><span style="color: slategray">已过期</span></p>
-					<?php endif; ?>
 				</div>
 			</a>
 		</div>
@@ -80,11 +81,7 @@
                     $.post("/home/inform/message",{"cover_id":this.cover_id,"update_time":this.update_time},function (data) {
                         var cover = $.parseJSON(data).cover;
                         var time = $.parseJSON(data).time;
-                        var newTime = $.parseJSON(data).nowTime;
                         var str = '<div class="row noticeList"> <a href="/home/article/detail/id/'+that.id+'.html"> <div class="col-xs-2"> <img class="noticeImg" src="'+cover+'" alt="加载失败"/> </div> <div class="col-xs-10"> <p class="title">'+that.title+'</p> <p class="intro">'+that.description+'</p> <p class="info">浏览: '+that.view+' <span class="pull-right">'+time+'</span> ';
-                        if (newTime > that.deadline){
-                            str += '<p><span style="color: slategray">已过期</span></p>';
-						}
                         str += '</p> </div> </a> </div>';
                         $("#inform").append(str);
                     })

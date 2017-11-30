@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"F:\www\tp\public/../application/admin/view/default/user\index.html";i:1496373782;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:66:"F:\www\tp\public/../application/admin/view/default/user\index.html";i:1512034078;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -146,7 +146,13 @@
 			<td><?php echo $vo['login']; ?></td>
 			<td><span><?php echo time_format($vo['last_login_time']); ?></span></td>
 			<td><span><?php echo long2ip($vo['last_login_ip']); ?></span></td>
-			<td><?php echo $vo['status_text']; ?></td>
+			<td>
+				<?php if($vo['status']==1): ?>
+				<span>正常</span>
+				<?php else: ?>
+				<span>已认证</span>
+				<?php endif; ?>
+			</td>
 			<td><?php if($vo['status'] == '1'): ?>
 				<a href="<?php echo url('User/changeStatus?method=forbidUser&id='.$vo['uid']); ?>" class="ajax-get">禁用</a>
 				<?php else: ?>

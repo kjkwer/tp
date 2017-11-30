@@ -10,6 +10,7 @@ namespace app\home\controller;
 
 
 use think\Controller;
+use think\Cookie;
 use think\Db;
 use think\Request;
 
@@ -21,6 +22,16 @@ class Repairs extends Controller
             //>>未登录,跳转至登录页面
             $this->success('请先登录', "/user/login/index","",3);
         }else{
+            //>>判断用户是否认证
+            $user_id = is_login();
+            $status = Db::table("ucenter_member")->where('id',$user_id)->value('status');
+            if ($status!=2){
+                //>>未认证用户
+                if(!$cookie_url = Cookie::get('__forward__')){
+                    $cookie_url = url('Home/auth/auth');
+                }
+                $this->success('请先认证业主',$cookie_url);
+            }
             //>>已登录获取用户名称
             $username = get_username();
         }

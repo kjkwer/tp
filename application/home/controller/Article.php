@@ -32,15 +32,12 @@ class Article extends Home {
 		if(false === $list){
 			$this->error('获取列表数据失败！');
 		}
-		//>>获取当前时间戳
-        $time = time();
         //>>获取导航菜单
         $channel = Db::table("channel")->where("status","=",1)->select();
 		/* 模板赋值并渲染模板 */
 		$this->assign('category', $category);
         $this->assign('channel',$channel);
 		$this->assign('informList', $list);
-		$this->assign('time', $time);
 		return $this->fetch($category['template_lists']);
 	}
 	/* 文档模型详情页 */

@@ -112,4 +112,24 @@ class User extends Controller
         //>>显示编辑表单
         return $this->fetch("repairs/repairs");
     }
+    //>>报名的活动
+    public function active(){
+        if (!is_login()){
+            $this->success('请先登录', "/user/login/index","",3);
+        }else{
+            //>>已登录获取用户id
+            $uid = is_login();
+        }
+        //>>获取用户参与活动的id
+        $ids = Db::table("member_article")->where("member_id","=",$uid)->column("article_id");
+        //>>获取参与的文章信息
+        $articles = Db::table("document")->where("id","in",$ids)->select();
+        //>>获取导航信息
+        $channel = Db::table("channel")->where("status","=",1)->select();
+        //>>数据放入页面中
+        $this->assign('channel',$channel);
+        $this->assign('informList',$articles);
+        //>>展示页面
+        return $this->fetch();
+    }
 }

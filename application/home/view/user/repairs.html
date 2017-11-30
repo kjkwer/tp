@@ -17,6 +17,9 @@
             <p class="navbar-text"><a href="/home/{$menu.url}.html" class="navbar-link">{$menu.title}</a></p>
         </div>
         {/volist}
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="{:url('server/index')}" class="navbar-link">服务</a></p>
+        </div>
         {if condition="is_login()"}
         <div class="col-xs-3">
             <p class="navbar-text"><a href="{:url('user/index')}" class="navbar-link">我的</a></p>
@@ -32,45 +35,18 @@
 <!--导航结束-->
 <div class="container">
     <div class="row">
-        <div style="height: 100px"></div>
-    </div>
-    <div class="row">
         <div class="col-xs-12">
-            <table class="table table-striped table-hover table-condensed">
-                <thead>
-                <tr>
-                    <th>联系人</th>
-                    <th>联系电话</th>
-                    <th>地址</th>
-                    <th>报修内容</th>
-                    <th>状态</th>
-                    <th>更新时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-
-                <thbody>
-                    {volist name="repairsList" id="repairs"}
-                    <tr>
-                        <td>{$repairs.name}</td>
-                        <td>{$repairs.tel}</td>
-                        <td>{$repairs.address}</td>
-                        <td>{$repairs.title}</td>
-                        <td>{$repairs.status=1?"待处理":"已处理"}</td>
-                        <td>{$repairs.update_time}</td>
-                        <td>
-                            <a href="{:url('editRepairs?id='.$repairs['id'])}">编辑</a>
-                            <a href="{:url('deleteRepairs?id='.$repairs['id'])}">删除</a>
-                        </td>
-                    </tr>
-                    {/volist}
-                </thbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="page">
-            {$pager}
+            {volist name="repairsList" id="repairs"}
+            <div class="container-fluid">
+                <div class="blank"></div>
+                <h3 class="noticeDetailTitle"><strong>{$repairs.title}</strong></h3>
+                <div class="noticeDetailInfo">{$repairs.status=1?"待处理":"已处理"}</div>
+                <div class="noticeDetailInfo">更新时间：{$repairs.update_time}</div>
+                <div><a href="{:url('editRepairs?id='.$repairs['id'])}">编辑</a>
+                    <a href="{:url('deleteRepairs?id='.$repairs['id'])}">删除</a></div>
+                <hr>
+            </div>
+            {/volist}
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:75:"F:\www\tp\public/../application/admin/view/default/real_estate\repairs.html";i:1511855460;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:75:"F:\www\tp\public/../application/admin/view/default/real_estate\repairs.html";i:1512037502;s:67:"F:\www\tp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -107,8 +107,6 @@
 <div class="cf">
     <a class="btn" href="<?php echo url('RealEstate/addRepairs',array('pid'=>input('get.pid',0))); ?>">新 增</a>
     <button class="btn ajax-post confirm" url="<?php echo url('deleteRepairs'); ?>" target-form="ids">删 除</button>
-    <a class="btn" href="<?php echo url('import',array('pid'=>input('get.pid',0))); ?>">导 入</a>
-    <button class="btn list_sort" url="<?php echo url('sort',array('pid'=>input('get.pid',0)),''); ?>">排序</button>
     <!-- 高级搜索 -->
     <div class="search-form fr cf">
         <div class="sleft">
@@ -151,23 +149,6 @@
                 <td><?php echo $menu['title']; ?></td>
                 <td><?php echo date("Y-m-d H:i:s",$menu['update_time']); ?></td>
                 <td><?php echo !empty($menu['status']=1)?"待处理":"已处理"; ?></td>
-                <!--<td>-->
-                    <!--<a href="<?php echo url('index?pid='.$menu['id']); ?>"><?php echo $menu['title']; ?></a>-->
-                <!--</td>-->
-                <!--<td><?php echo (isset($menu['up_title']) && ($menu['up_title'] !== '')?$menu['up_title']:'无'); ?></td>-->
-                <!--<td><?php echo $menu['group']; ?></td>-->
-                <!--<td><?php echo $menu['url']; ?></td>-->
-                <!--<td><?php echo $menu['sort']; ?></td>-->
-                <!--<td>-->
-                    <!--<a href="<?php echo url('toogleDev',array('id'=>$menu['id'],'value'=>abs($menu['is_dev']-1))); ?>" class="ajax-get">-->
-                        <!--<?php echo $menu['is_dev_text']; ?>-->
-                    <!--</a>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<a href="<?php echo url('toogleHide',array('id'=>$menu['id'],'value'=>abs($menu['hide']-1))); ?>" class="ajax-get">-->
-                        <!--<?php echo $menu['hide_text']; ?>-->
-                    <!--</a>-->
-                <!--</td>-->
                 <td>
                     <a title="编辑" href="<?php echo url('editRepairs?id='.$menu['id']); ?>">编辑</a>
                     <a class="confirm ajax-get" title="删除" href="<?php echo url('deleteRepairs?id='.$menu['id']); ?>">删除</a>

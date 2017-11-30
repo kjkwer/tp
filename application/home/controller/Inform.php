@@ -29,14 +29,15 @@ class Inform extends Controller
         $request = Request::instance();
         $cover_id = $request->post("cover_id");
         $update_time = $request->post("update_time");
+        $category_id = $request->post("category_id");
         //>>获取通知的封面图片
         $cover_path = get_cover($cover_id,"path");
         //>>将更新时间格式化
         $time = date("Y-m-d H:i:s",$update_time);
-        //>>获取当前时间戳
-        $nowTime = time();
+        //>>获取所属分类
+        $category_name = get_category_title($category_id);
         //>>响应数据
-        return json_encode(["cover"=>$cover_path,"time"=>$time,"nowTime"=>$nowTime]);
+        return json_encode(["cover"=>$cover_path,"time"=>$time,"category_name"=>$category_name]);
     }
     //>>参与活动
     public function join(){

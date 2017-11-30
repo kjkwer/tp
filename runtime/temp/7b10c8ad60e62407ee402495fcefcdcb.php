@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"F:\www\tp\public/../application/home/view/default/article\article\detail.html";i:1511953654;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"F:\www\tp\public/../application/home/view/default/article\article\detail.html";i:1512030119;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -25,13 +25,17 @@
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
             </div>
-            <?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('server/index'); ?>" class="navbar-link">服务</a></p>
+            </div>
+            <?php if(is_login()): ?>
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
             </div>
             <?php else: ?>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录/注册</a></p>
+                <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">登录/注册</a></p>
             </div>
             <?php endif; ?>
         </div>
@@ -41,15 +45,13 @@
     <div class="container-fluid">
         <div class="blank"></div>
         <h3 class="noticeDetailTitle"><strong><?php echo $inform['title']; ?></strong></h3>
-        <div class="noticeDetailInfo">发布者:<?php echo $author; ?></div>
+        <div class="noticeDetailInfo">发布者:<?php echo get_username($inform['uid']); ?></div>
         <div class="noticeDetailInfo">时间：<?php echo date("Y-m-d H:i",$inform['create_time']); ?>至<?php echo date("Y-m-d H:i",$inform['deadline']); ?></div>
-        <?php if($overdue=="no"): if($category['id']==48): if($model): ?>
-                    <a href="javascript:;" class="btn btn-success" disabled="disabled">报名成功</a>
-                <?php else: ?>
-                    <a href="javascript:;" class="btn btn-primary" id="join" article_id="<?php echo $inform['id']; ?>">参与活动</a>
-                <?php endif; endif; else: ?>
-            <a href="javascript:;" class="btn btn-warning" disabled="disabled">已过期</a>
-        <?php endif; ?>
+        <?php if($category['id']==48): if($model): ?>
+                <a href="javascript:;" class="btn btn-success" disabled="disabled">报名成功</a>
+            <?php else: ?>
+                <a href="javascript:;" class="btn btn-primary" id="join" article_id="<?php echo $inform['id']; ?>">参与活动</a>
+            <?php endif; endif; ?>
         <div class="noticeDetailContent">
             <?php echo $inform['content']; ?>
         </div>
@@ -69,7 +71,7 @@
         $.post("/home/inform/join",{"article_id":article_id},function (data) {
             if (data == "fail"){
                 //>>请先登录
-                window.location.href="/home/user/index";
+                window.location.href="/user/login/index";
             }else if (data == "success"){
                 //>>参与成功
                 alert("报名成功");

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:62:"F:\www\tp\public/../application/home\view\repairs\repairs.html";i:1511858401;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:62:"F:\www\tp\public/../application/home\view\repairs\repairs.html";i:1512025238;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -20,14 +20,17 @@
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
             </div>
-            <?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('server/index'); ?>" class="navbar-link">服务</a></p>
+            </div>
+            <?php if(is_login()): ?>
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
             </div>
             <?php else: ?>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="/user/login/index.html" class="navbar-link">登录</a></p>
-                <p class="navbar-text"><a href="/user/login/register.html" class="navbar-link">注册</a></p>
+                <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">登录/注册</a></p>
             </div>
             <?php endif; ?>
         </div>

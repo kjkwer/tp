@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:57:"F:\www\tp\public/../application/home\view\user\index.html";i:1511855902;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:57:"F:\www\tp\public/../application/home\view\user\index.html";i:1512063726;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -25,7 +25,11 @@
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="/home/<?php echo $menu['url']; ?>.html" class="navbar-link"><?php echo $menu['title']; ?></a></p>
             </div>
-            <?php endforeach; endif; else: echo "" ;endif; if(is_login()): ?>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('server/index'); ?>" class="navbar-link">服务</a></p>
+            </div>
+            <?php if(is_login()): ?>
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="<?php echo url('user/index'); ?>" class="navbar-link">我的</a></p>
             </div>
@@ -46,7 +50,12 @@
                 <img src="/image/default_touxiang.jpg" width="60" height="60" alt="暂无头像"/>
             </div>
             <div class="col-xs-9">
-                <?php echo $username; ?><br/>
+                <?php echo $username; if(get_user().status==2): ?>
+                    <button class="btn btn-xs btn-success" id="is_auth">已认证业主</button>
+                <?php else: ?>
+                    <a href="<?php echo url('home/auth/auth'); ?>" class="btn btn-xs btn-warning">未认证业主</a>
+                <?php endif; ?>
+                <br/>
                 北大花园小区<br/>
                 积分:<span class="text-danger">100</span><br>
                 <a href="<?php echo url('user/login/logout'); ?>">退出登录</a>
@@ -56,7 +65,7 @@
         <div class="row text-center myLabel">
             <div class="col-xs-4 label-danger"><a href="#"><span class="iconfont">&#xe60b;</span>我的资料</a></div>
             <div class="col-xs-4 label-success"><a href="<?php echo url('repairs'); ?>"><span class="iconfont">&#xe609;</span>我的报修</a></div>
-            <div class="col-xs-4 label-primary"><a href="#"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
+            <div class="col-xs-4 label-primary"><a href="<?php echo url('active'); ?>"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
         </div>
         <div class="blank"></div>
         <div>
@@ -72,5 +81,17 @@
 <script src="/bootstrap/js/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+<!--JS代码-->
+
+<script type="text/javascript">
+    //>>已认证状态
+    $("#is_auth").click(function () {
+        alert("以认证,无需再次认证");
+    })
+</script>
+
 </body>
 </html>
